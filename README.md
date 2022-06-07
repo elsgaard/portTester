@@ -11,6 +11,8 @@ Listen on an TCP port in order to verify incoming connections. Mainly used to ve
 Usage ./portTester
   -port string
         Listening port number (default 80)
+  -host string
+        Bind to host (default localhost)
 ```
 
 ## Contributing
