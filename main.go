@@ -8,20 +8,22 @@ import (
 )
 
 const (
-	CONN_HOST = "localhost"
 	CONN_TYPE = "tcp"
 )
 
 func main() {
 	portPtr := flag.String("port", "80", "Listening port")
+	hostPtr := flag.String("host", "localhost", "bind to host")
 
-	l, err := net.Listen(CONN_TYPE, CONN_HOST+":"+*portPtr)
+	flag.Parse()
+
+	l, err := net.Listen(CONN_TYPE, *hostPtr+":"+*portPtr)
 	if err != nil {
 		fmt.Println("Error listening:", err.Error())
 		os.Exit(1)
 	}
 	defer l.Close()
-	fmt.Println("Listening on " + CONN_HOST + ":" + *portPtr)
+	fmt.Println("Listening on " + *hostPtr + ":" + *portPtr)
 	for {
 		conn, err := l.Accept()
 		if err != nil {
